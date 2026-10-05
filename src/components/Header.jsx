@@ -21,7 +21,7 @@ export default function Header() {
     <header className={`header${open ? ' is-open' : ''}`}>
       <div className="header__inner">
         <a className="header__logo" href={langPath(lang)} aria-label="NVS Motors">
-          <img src="/logo.svg" alt="NVS Motors" width="430" height="236" />
+          <img src="/logo-sm.webp" srcSet="/logo-sm.webp 360w, /logo.webp 900w" sizes="120px" alt="NVS Motors" width="360" height="238" />
         </a>
 
         <nav className="nav" id="site-nav" aria-label={t.nav.menu}>

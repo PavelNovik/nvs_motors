@@ -11,7 +11,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="container footer__inner">
         <div className="footer__brand">
-          <img src="/logo.svg" alt="NVS Motors" width="430" height="236" loading="lazy" />
+          <img src="/logo-sm.webp" srcSet="/logo-sm.webp 360w, /logo.webp 900w" sizes="230px" alt="NVS Motors" width="360" height="238" loading="lazy" />
           <p className="footer__tagline text-gold">{f.tagline}</p>
         </div>
         <nav aria-label={t.nav.menu}>

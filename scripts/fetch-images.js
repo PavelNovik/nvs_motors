@@ -2,7 +2,7 @@
 // 1) scripts/images.json — фоны с Unsplash → public/images/<name>.webp и <name>-sm.webp;
 // 2) raw/ig/*.jpg — кадры из Instagram @nvsmotorss (обложки рилсов 360×640) → public/images/work/<id>.webp:
 //    чёрные поля сверху/снизу обрезаются (trim), кадр приводится к 3:4;
-// 3) public/logo.svg → og-image.jpg (1200×630) и apple-touch-icon.png.
+// 3) public/logo.png (готовит scripts/build-logo.js) → og-image.jpg (1200×630).
 // Запуск: npm run images. Свои фото — просто положите WebP в public/images.
 import fs from 'node:fs'
 import path from 'node:path'
@@ -46,13 +46,9 @@ const bg = await sharp(path.join(out, 'bg-desktop.webp')).resize(1200, 630, { fi
 const shade = Buffer.from(
   '<svg width="1200" height="630"><defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#000" stop-opacity=".92"/><stop offset=".6" stop-color="#000" stop-opacity=".55"/><stop offset="1" stop-color="#000" stop-opacity=".2"/></linearGradient></defs><rect width="1200" height="630" fill="url(#g)"/></svg>'
 )
-const logo = await sharp(path.join(pub, 'logo.svg'), { density: 200 }).resize(640).png().toBuffer()
+const logo = await sharp(path.join(pub, 'logo.png')).resize(560).toBuffer()
 await sharp(bg)
-  .composite([{ input: shade }, { input: logo, left: 70, top: 140 }])
+  .composite([{ input: shade }, { input: logo, left: 70, top: 130 }])
   .jpeg({ quality: 84 })
   .toFile(path.join(pub, 'og-image.jpg'))
-await sharp({ create: { width: 180, height: 180, channels: 3, background: '#0b0b0c' } })
-  .composite([{ input: await sharp(path.join(pub, 'favicon.svg'), { density: 400 }).resize(140).png().toBuffer(), left: 20, top: 20 }])
-  .png()
-  .toFile(path.join(pub, 'apple-touch-icon.png'))
-console.log('  og-image.jpg, apple-touch-icon.png')
+console.log('  og-image.jpg')

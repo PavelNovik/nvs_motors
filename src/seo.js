@@ -20,7 +20,7 @@ export function jsonLd(lang) {
         slogan: 'Twój samochód — nasza pasja!',
         description: t.meta.description,
         url: abs('/'),
-        logo: abs('/logo.svg'),
+        logo: abs('/logo.png'),
         image: [abs('/og-image.jpg'), abs(img('work/lift')), abs(img('work/g-class'))],
         telephone: brand.phone,
         founder: { '@type': 'Person', name: brand.owner },

@@ -57,7 +57,7 @@ export default function Hero() {
 
         <div className="hero__emblem" data-reveal aria-hidden="true">
           <div className="hero__ring" />
-          <img src="/logo.svg" alt="" width="430" height="236" />
+          <img src="/logo.webp" alt="" width="900" height="596" />
         </div>
       </div>
       <a className="hero__scroll" href="#services" aria-label={h.scroll}>
