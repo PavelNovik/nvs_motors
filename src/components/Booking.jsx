@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
-import { brand, services, tel } from '../config.js'
+import { brand, services, tel, waLink } from '../config.js'
 import { useLang } from '../i18n/index.jsx'
-import { composeMessage, sendWhatsApp } from '../send.js'
+import { composeMessage } from '../send.js'
 import Icon from './Icon.jsx'
 import SectionHead from './SectionHead.jsx'
 
@@ -14,6 +14,8 @@ export default function Booking() {
   const [form, setForm] = useState(empty)
   const [minDate, setMinDate] = useState(undefined)
   const carRef = useRef(null)
+  const formRef = useRef(null)
+  const sendRef = useRef(null)
 
   useEffect(() => {
     setMinDate(new Date().toISOString().slice(0, 10))
@@ -31,10 +33,12 @@ export default function Booking() {
 
   const serviceName = (id) => (id === 'other' ? b.other : t.services.items[id]?.name ?? '')
 
-  const submit = (e) => {
-    e.preventDefault()
-    const date = form.date ? new Date(form.date + 'T12:00').toLocaleDateString(t.locale.replace('_', '-')) : ''
-    const text = composeMessage([
+  // Ссылка wa.me с текстом заявки пересчитывается при каждом вводе. Кнопка «Wyślij» — настоящая ссылка <a>:
+  // клик по ней не блокируется как всплывающее окно (в отличие от window.open) — ни в Safari, ни во встроенных
+  // браузерах Instagram/TikTok; на телефоне wa.me сразу открывает приложение WhatsApp.
+  const date = form.date ? new Date(form.date + 'T12:00').toLocaleDateString(t.locale.replace('_', '-')) : ''
+  const href = waLink(
+    composeMessage([
       ['', b.hello],
       [b.fields.name, form.name],
       [b.fields.phone, form.phone],
@@ -43,7 +47,21 @@ export default function Booking() {
       [b.fields.date, date],
       [b.fields.message, form.message],
     ])
-    sendWhatsApp(text)
+  )
+
+  // Не пускаем по ссылке, пока не заполнены обязательные поля (имя, авто) — браузер покажет подсказку
+  const onSend = (e) => {
+    const f = formRef.current
+    if (f && !f.checkValidity()) {
+      e.preventDefault()
+      f.reportValidity()
+    }
+  }
+
+  // Enter в поле формы = клик по ссылке отправки
+  const submit = (e) => {
+    e.preventDefault()
+    sendRef.current?.click()
   }
 
   return (
@@ -65,7 +83,7 @@ export default function Booking() {
           </p>
         </div>
 
-        <form className="card glass form" data-glow data-reveal onSubmit={submit}>
+        <form ref={formRef} className="card glass form" data-glow data-reveal onSubmit={submit}>
           <div className="form__row">
             <Field label={b.fields.name} required>
               <input name="name" autoComplete="given-name" required value={form.name} onChange={set('name')} placeholder={b.placeholders.name} />
@@ -99,10 +117,10 @@ export default function Booking() {
           <Field label={b.fields.message}>
             <textarea name="message" rows="4" value={form.message} onChange={set('message')} placeholder={b.placeholders.message} />
           </Field>
-          <button type="submit" className="btn btn--wa btn--lg btn--block">
+          <a ref={sendRef} className="btn btn--wa btn--lg btn--block" href={href} target="_blank" rel="noopener" onClick={onSend}>
             <Icon name="whatsapp" size={22} />
             {b.send}
-          </button>
+          </a>
           <p className="form__note">{b.note}</p>
         </form>
       </div>
