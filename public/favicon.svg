@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-6 -6 116 136">
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff6cf"/>
+      <stop offset=".3" stop-color="#f4cb62"/>
+      <stop offset=".55" stop-color="#b07d22"/>
+      <stop offset=".8" stop-color="#fbe08c"/>
+      <stop offset="1" stop-color="#8a5b10"/>
+    </linearGradient>
+    <linearGradient id="shield" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a3a40"/>
+      <stop offset="1" stop-color="#070708"/>
+    </linearGradient>
+  </defs>
+  <path d="M52 0 104 15v46q0 40-52 63Q0 101 0 61V15z" fill="url(#shield)" stroke="url(#gold)" stroke-width="8" stroke-linejoin="round"/>
+  <g fill="url(#gold)">
+    <g transform="translate(52 62) rotate(45)">
+      <rect x="-6" y="-30" width="12" height="58" rx="4"/>
+      <circle cx="0" cy="-34" r="15"/><rect x="-6" y="-51" width="12" height="18" fill="#141416"/>
+      <circle cx="0" cy="34" r="12"/><circle cx="0" cy="34" r="5" fill="#0b0b0c"/>
+    </g>
+    <g transform="translate(52 62) rotate(-45)">
+      <rect x="-6" y="-30" width="12" height="58" rx="4"/>
+      <circle cx="0" cy="-34" r="15"/><rect x="-6" y="-51" width="12" height="18" fill="#141416"/>
+      <circle cx="0" cy="34" r="12"/><circle cx="0" cy="34" r="5" fill="#0b0b0c"/>
+    </g>
+  </g>
+</svg>

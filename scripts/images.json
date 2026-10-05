@@ -1,0 +1,6 @@
+{
+  "bg-desktop": { "src": "https://images.unsplash.com/photo-1622637385417-00da7c636218", "credit": "Unsplash", "width": 2400 },
+  "bg-mobile": { "src": "https://images.unsplash.com/photo-1580014317999-e9f1936787a5", "credit": "Unsplash", "width": 1100, "params": "h=1900&fit=crop" },
+  "cta": { "src": "https://images.unsplash.com/photo-1649282061414-82832525b912", "credit": "Unsplash", "width": 1800 },
+  "cta-mobile": { "src": "https://images.unsplash.com/photo-1581182552786-a65eafcd0cec", "credit": "Unsplash", "width": 900, "params": "h=1300&fit=crop" }
+}
