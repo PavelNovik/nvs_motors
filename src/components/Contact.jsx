@@ -4,12 +4,12 @@ import { useLang } from '../i18n/index.jsx'
 import Icon from './Icon.jsx'
 import SectionHead from './SectionHead.jsx'
 import OpenStatus from './OpenStatus.jsx'
+import RouteLink from './RouteLink.jsx'
 
 export default function Contact() {
   const { t } = useLang()
   const c = t.contact
   const [map, setMap] = useState(false)
-  const route = `https://www.google.com/maps/dir/?api=1&destination=${brand.geo.lat},${brand.geo.lng}`
 
   return (
     <section className="section" id="contact" aria-labelledby="contact-title">
@@ -22,9 +22,11 @@ export default function Contact() {
               <div>
                 <p className="contact__label">{c.address}</p>
                 <p className="contact__value">
-                  {brand.street}
-                  <br />
-                  {brand.postalCode} {brand.city}
+                  <RouteLink className="contact__address" title={c.route}>
+                    {brand.street}
+                    <br />
+                    {brand.postalCode} {brand.city}
+                  </RouteLink>
                 </p>
               </div>
             </div>
@@ -58,9 +60,9 @@ export default function Contact() {
               <a className="btn btn--wa" href={waLink(t.wa.hello)} target="_blank" rel="noopener">
                 <Icon name="whatsapp" size={20} /> WhatsApp
               </a>
-              <a className="btn btn--glass" href={route} target="_blank" rel="noopener">
+              <RouteLink className="btn btn--glass">
                 <Icon name="route" size={20} /> {c.route}
-              </a>
+              </RouteLink>
             </div>
 
             <div className="contact__social">

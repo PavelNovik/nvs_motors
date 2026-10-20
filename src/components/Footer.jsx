@@ -2,6 +2,7 @@ import { brand, navIds, tel } from '../config.js'
 import { useLang } from '../i18n/index.jsx'
 import { openCookieSettings } from './CookieConsent.jsx'
 import Icon from './Icon.jsx'
+import RouteLink from './RouteLink.jsx'
 
 export default function Footer() {
   const { t } = useLang()
@@ -25,7 +26,10 @@ export default function Footer() {
         </nav>
         <div className="footer__contact">
           <p>
-            {brand.street}, {brand.postalCode} {brand.city}
+            <RouteLink className="footer__address" title={t.contact.route}>
+              <Icon name="pin" size={16} />
+              {brand.street}, {brand.postalCode} {brand.city}
+            </RouteLink>
           </p>
           <p>
             <a href={tel}>{brand.phone}</a>
